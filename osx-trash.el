@@ -35,6 +35,9 @@
 ;; not available, the script falls back to an AppleScript helper which trashes
 ;; the file via finder.  `trash' is generally preferred, because AppleScript is
 ;; slow.
+;;
+;; To enable, call `osx-trash-setup' and set `delete-by-moving-to-trash' to a
+;; non-nil value.
 
 ;;; Code:
 
