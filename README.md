@@ -15,7 +15,8 @@ Install this package from [MELPA][] or [MELPA Stable][], and add the following
 to your init file:
 
 ```cl
-(osx-trash-setup)
+(when (eq system-type 'darwin)
+  (osx-trash-setup))
 (setq delete-by-moving-to-trash t)
 ```
 
