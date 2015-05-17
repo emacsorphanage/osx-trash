@@ -74,7 +74,8 @@ Provide `system-move-file-to-trash' as an alias for
 
 Note that you still need to set `delete-by-moving-to-trash' to a
 non-nil value to enable trashing for file operations."
-  (unless (fboundp 'system-move-file-to-trash)
+  (when (and (eq system-type 'darwin)
+             (not (fboundp 'system-move-file-to-trash)))
     (defalias 'system-move-file-to-trash
       'osx-trash-move-file-to-trash)))
 
