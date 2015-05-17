@@ -6,6 +6,7 @@
 ;; Version: 0.1-cvs
 ;; URL: https://github.com/lunaryorn/osx-trash.el
 ;; Keywords: files, convenience, tools, unix
+;; Package-Requires: ((emacs "24.1"))
 
 ;; This file is not part of GNU Emacs.
 
