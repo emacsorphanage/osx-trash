@@ -1,5 +1,5 @@
-master (in development)
-=======================
+0.1.1 (May 20, 2015)
+====================
 
 - Only set alias on OS X
 
