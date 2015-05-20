@@ -1,6 +1,8 @@
 # osx-trash.el
 
 [![License GPL 3][badge-gpl3]][COPYING]
+[![MELPA Stable](http://stable.melpa.org/packages/osx-trash-badge.svg)](http://stable.melpa.org/#/osx-trash)
+![MELPA](http://melpa.org/packages/osx-trash-badge.svg)](http://melpa.org/#/osx-trash)
 
 Provide OS X system trash support for GNU Emacs 24.  In other words, makes
 `delete-by-moving-to-trash` do what you expect it to do.
