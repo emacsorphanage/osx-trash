@@ -52,7 +52,7 @@
   "The absolute path to the directory of this package.")
 
 (defconst osx-trash-script-file
-  (expand-file-name "trashfile.scpt" osx-trash-pkg-dir))
+  (expand-file-name "trashfile.AppleScript" osx-trash-pkg-dir))
 
 (defun osx-trash-move-file-to-trash (file-name)
   "Move FILE-NAME to trash.
