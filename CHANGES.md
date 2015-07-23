@@ -1,6 +1,8 @@
 master (in development)
 =======================
 
+- Signal an error if trashing fails
+
 0.1.1 (May 20, 2015)
 ====================
 
