@@ -60,10 +60,14 @@
 Try to call the `trash' utility first, because it's faster, and
 fall back to AppleScript if `trash' wasn't found."
   (let ((file-name (expand-file-name file-name)))
-    (condition-case nil
-        (call-process "trash" nil nil nil file-name)
-      (file-error
-       (call-process "osascript" nil nil nil osx-trash-script-file file-name)))))
+    (with-temp-buffer
+      (let ((retcode (condition-case nil
+                         (call-process "trash" nil t nil file-name)
+                       (file-error
+                        (call-process "osascript" nil t nil
+                                      osx-trash-script-file file-name)))))
+        (unless (equal retcode 0)
+          (error "Failed to trash %S: %S" file-name (buffer-string)))))))
 
 ;;;###autoload
 (defun osx-trash-setup ()
