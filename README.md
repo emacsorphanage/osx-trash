@@ -1,6 +1,6 @@
 # osx-trash.el
 
-[![License GPL 3][badge-gpl3]][COPYING]
+[![License GPL 3](https://img.shields.io/github/license/lunaryorn/osx-trash.el.svg)][COPYING]
 [![MELPA Stable](http://stable.melpa.org/packages/osx-trash-badge.svg)](http://stable.melpa.org/#/osx-trash)
 [![MELPA](http://melpa.org/packages/osx-trash-badge.svg)](http://melpa.org/#/osx-trash)
 
