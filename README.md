@@ -4,8 +4,17 @@
 [![MELPA Stable](http://stable.melpa.org/packages/osx-trash-badge.svg)](http://stable.melpa.org/#/osx-trash)
 [![MELPA](http://melpa.org/packages/osx-trash-badge.svg)](http://melpa.org/#/osx-trash)
 
-Provide OS X system trash support for GNU Emacs 24.  In other words, makes
-`delete-by-moving-to-trash` do what you expect it to do.
+Make `delete-by-moving-to-trash` do what you expect it to do on OS X.
+
+For whatever reason GNU Emacs doesn’t support the system trash can on OS X.
+Instead it’ll move files into the freedesktop.org trash can, which is, uhm, not
+particularly useful behaviour on OS X.
+
+This package makes Emacs do the right thing(TM) and move files to the real OS X
+trash can.
+
+**Note:** If you’re using the Emacs Mac Port, or if you’re not using OS X at
+all, you’ll *not* need this package!
 
 [badge-gpl3]: https://img.shields.io/badge/license-GPL_3-blue.svg
 [COPYING]: https://github.com/lunaryorn/osx-trash.el/blob/master/COPYING
