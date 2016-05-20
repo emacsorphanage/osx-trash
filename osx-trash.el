@@ -29,7 +29,7 @@
 ;; `delete-by-moving-to-trash' do what you expect it to do.
 ;;
 ;; Emacs does not support the system trash of OS X.  `system-move-file-to-trash'
-;; is not defined. This library provides `osx-trash-move-file-to-trash' as an
+;; is not defined.  This library provides `osx-trash-move-file-to-trash' as an
 ;; implementation of `system-move-file-to-trash' for OS X.
 ;;
 ;; `osx-trash-move-file-to-trash' tries to use `trash' utility from
