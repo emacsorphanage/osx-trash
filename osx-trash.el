@@ -1,9 +1,9 @@
 ;;; osx-trash.el --- System trash for OS X           -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2014-2015  Sebastian Wiesner <swiesner@lunaryorn.com>
+;; Copyright (C) 2014-2016  Sebastian Wiesner <swiesner@lunaryorn.com>
 
 ;; Author: Sebastian Wiesner <swiesner@lunaryorn.com>
-;; Version: 0.2-cvs
+;; Version: 0.2
 ;; URL: https://github.com/lunaryorn/osx-trash.el
 ;; Keywords: files, convenience, tools, unix
 ;; Package-Requires: ((emacs "24.1"))
