@@ -62,7 +62,7 @@ fall back to AppleScript if `trash' wasn't found."
   (let ((file-name (expand-file-name file-name)))
     (with-temp-buffer
       (let ((retcode (condition-case nil
-                         (call-process "trash" nil t nil file-name)
+                         (call-process "trash" nil t nil "-F" file-name)
                        (file-error
                         (call-process "osascript" nil t nil
                                       osx-trash-script-file file-name)))))
