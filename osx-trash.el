@@ -28,46 +28,64 @@
 ;; Add support for system trash on OS X.  In other words, make
 ;; `delete-by-moving-to-trash' do what you expect it to do.
 ;;
-;; Emacs does not support the system trash of OS X.  `system-move-file-to-trash'
-;; is not defined.  This library provides `osx-trash-move-file-to-trash' as an
-;; implementation of `system-move-file-to-trash' for OS X.
+;; Emacs does not support the system trash of OS X.  This library
+;; provides `osx-trash-move-file-to-trash' as an implementation of
+;; `system-move-file-to-trash' for OS X.
 ;;
-;; `osx-trash-move-file-to-trash' tries to use `trash' utility from
-;; https://github.com/ali-rantakari/trash (brew install trash).  If `trash' is
-;; not available, the script falls back to an AppleScript helper which trashes
-;; the file via finder.  `trash' is generally preferred, because AppleScript is
-;; slow.
+;; By default an AppleScript helper is used to actually trash the
+;; file using the finder, but that is slow, so you might want to
+;; customize option `osx-trash-command' to use a faster command.
 ;;
-;; To enable, call `osx-trash-setup' and set `delete-by-moving-to-trash' to a
-;; non-nil value.
+;; To enable use of the system trash, call `osx-trash-setup' and
+;; set `delete-by-moving-to-trash' to a non-nil value.
 
 ;;; Code:
 
-(defconst osx-trash-pkg-file
-  (expand-file-name (if load-in-progress load-file-name (buffer-file-name)))
-  "The absolute path to this file.")
-
-(defconst osx-trash-pkg-dir
-  (file-name-directory osx-trash-pkg-file)
-  "The absolute path to the directory of this package.")
-
 (defconst osx-trash-script-file
-  (expand-file-name "trashfile.AppleScript" osx-trash-pkg-dir))
+  (expand-file-name "trashfile.AppleScript"
+                    (file-name-directory
+                     (or load-file-name (buffer-file-name)))))
+
+(defcustom osx-trash-command nil
+  "Command used to move a file to the trash.
+
+For this command to be used you also have to call `osx-trash-setup'
+and set `delete-by-moving-to-trash' to a non-nil value.
+
+This has to be a list of strings, beginning with the executable,
+followed by its arguments, if any.  The file name is added as the
+last argument.  Alternatively this can be nil (the default), in
+which case a bundled Applescript is used.
+
+Applescript is slow, so you might want to use a command named
+\"trash\".  Several such commands are available, but they are
+not compatible.
+
+- The one from https://github.com/ali-rantakari/trash takes an
+  optional \"-F\" argument.  Its documentation does not say so,
+  but it has been reported that this argument is necessary to
+  actually allow the Finder to restore trashed files.
+
+- The one from https://github.com/sindresorhus/macos-trash does
+  not take such an argument."
+  :group 'auto-save
+  :type '(choice (const :tag "use Applescript helper")
+                 (repeat :tag "command and arguments" string)))
 
 (defun osx-trash-move-file-to-trash (file-name)
   "Move FILE-NAME to trash.
 
-Try to call the `trash' utility first, because it's faster, and
-fall back to AppleScript if `trash' wasn't found."
+Option `osx-trash-command' controls what command is used."
   (let ((file-name (expand-file-name file-name)))
     (with-temp-buffer
-      (let ((retcode (condition-case nil
-                         (call-process "trash" nil t nil "-F" file-name)
-                       (file-error
+      (unless (zerop (if osx-trash-command
+                         (apply #'call-process
+                                (car osx-trash-command) nil t nil
+                                (append (cdr osx-trash-command)
+                                        (list file-name)))
                         (call-process "osascript" nil t nil
-                                      osx-trash-script-file file-name)))))
-        (unless (equal retcode 0)
-          (error "Failed to trash %S: %S" file-name (buffer-string)))))))
+                                      osx-trash-script-file file-name)))
+        (error "Failed to trash %S: %S" file-name (buffer-string))))))
 
 ;;;###autoload
 (defun osx-trash-setup ()
@@ -84,4 +102,7 @@ non-nil value to enable trashing for file operations."
       'osx-trash-move-file-to-trash)))
 
 (provide 'osx-trash)
+;; Local Variables:
+;; indent-tabs-mode: nil
+;; End:
 ;;; osx-trash.el ends here

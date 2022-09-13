@@ -1,6 +1,6 @@
 # osx-trash.el
 
-[![License GPL 3](https://img.shields.io/github/license/lunaryorn/osx-trash.el.svg)][COPYING]
+[![License GPL 3](https://img.shields.io/github/license/emacsorphanage/osx-trash.el.svg)][COPYING]
 [![MELPA Stable](http://stable.melpa.org/packages/osx-trash-badge.svg)](http://stable.melpa.org/#/osx-trash)
 [![MELPA](http://melpa.org/packages/osx-trash-badge.svg)](http://melpa.org/#/osx-trash)
 
@@ -25,22 +25,20 @@ Setup
 Install this package from [MELPA][] or [MELPA Stable][], and add the following
 to your init file:
 
-```cl
+```elisp
 (when (eq system-type 'darwin)
   (osx-trash-setup))
 (setq delete-by-moving-to-trash t)
 ```
 
-Optionally, install [trash][] with `brew install trash`.  Otherwise this package
-falls back to a little AppleScript helper, which works just as well, but is a
-little slower.
+By default this package uses a bundled Applescript helper, but that is slow,
+so you should customize `osx-trash-command` to use a faster external command.
 
 [MELPA]: http://melpa.org
 [MELPA Stable]: http://stable.melpa.org
-[trash]: https://github.com/ali-rantakari/trash
 
 License
-=======
+-------
 
 osx-trash is free software: you can redistribute it and/or modify it under the
 terms of the GNU General Public License as published by the Free Software
